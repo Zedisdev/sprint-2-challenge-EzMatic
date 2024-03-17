@@ -6,28 +6,61 @@
   <script id="challenge">
     // 👉 CHALLENGE 1
     function profileActivation(profile, reason) {
+  if (profile.active && reason === undefined) {
+    return "confirm status manually";
+  }
+  if (profile.active) {
+    profile.active = false;
+    profile.reason = reason;
+  } else {
+    profile.active = true;
+    delete profile.reason;
+  }
+  return profile;
+}
 
-    }
 
     // 👉 CHALLENGE 2
     function mineSweeper(grid, x, y) {
+  if (x < 1 || x > 3 || y < 1 || y > 3) {
+    return "invalid coordinates";
+  }
+  return grid[y - 1][x - 1] === "🟥" ? "🟥 💀" : "🟦 🥳";
+}
 
-    }
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
+  for (let prop in obj) {
+    if (prop.length > 9) {
+      return "shorten all prop names to 9 chars or less";
     }
+    if (obj[prop] === 0) {
+      obj[prop] = false;
+    } else if (obj[prop] === 1) {
+      obj[prop] = true;
+    } else if (obj[prop] === null) {
+      delete obj[prop];
+    }
+  }
+  return obj;
+}
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+  forbidden.forEach(word => {
+    let regex = new RegExp(word, "gi");
+    text = text.replace(regex, "x".repeat(word.length));
+  });
+  return text;
+}
 
-    }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
     function normalizePhoneNumber(num) {
+  return `(${num.substring(0, 3)}) ${num.substring(3, 6)}-${num.substring(6)}`;
+}
 
-    }
 
     // 👉 CHALLENGE 6 (bonus, NOT graded)
     function diceRolls() {
